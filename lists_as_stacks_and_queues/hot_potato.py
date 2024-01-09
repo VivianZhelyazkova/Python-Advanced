@@ -21,3 +21,5 @@ while len(kids_names) > 1:
     print(f"Removed {leaver}")
 
 print(f"Last is {kids_names.popleft()}")
+
+

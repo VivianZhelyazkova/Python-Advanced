@@ -10,9 +10,11 @@ for i in range(number):
         if len(stack) > 0:
             stack.pop()
     elif cmd_numer == "3":
-        print(max(stack))
+        if len(stack) > 0:
+            print(max(stack))
     elif cmd_numer == "4":
-        print(min(stack))
+        if len(stack) > 0:
+            print(min(stack))
 
 for number in range(len(stack)):
     print(stack.pop(), end=', ' if stack else "")

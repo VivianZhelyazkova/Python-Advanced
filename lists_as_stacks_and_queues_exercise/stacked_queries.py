@@ -7,11 +7,12 @@ for i in range(number):
         number_to_push = int(command.split()[1])
         stack.append(number_to_push)
     elif cmd_numer == "2":
-        stack.pop()
+        if len(stack) > 0:
+            stack.pop()
     elif cmd_numer == "3":
         print(max(stack))
     elif cmd_numer == "4":
         print(min(stack))
 
 for number in range(len(stack)):
-    print(stack.pop(), end=" ")
+    print(stack.pop(), end=', ' if stack else "")

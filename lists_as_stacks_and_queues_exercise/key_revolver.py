@@ -12,3 +12,13 @@ current_barrel = 0
 
 while bullets:
 
+    current_bullet = bullets.pop()
+    current_lock = locks.popleft()
+    current_barrel += 1
+    if current_bullet <= current_lock:
+        print("Bang!")
+    else:
+        print("Ping!")
+        locks.appendleft(current_lock)
+
+    

@@ -14,7 +14,7 @@ while cups and bottles:
         continue
     else:
         cups.appendleft(current_cup)
-        
+
 if not cups:
     print(f"Bottles:", *bottles)
 

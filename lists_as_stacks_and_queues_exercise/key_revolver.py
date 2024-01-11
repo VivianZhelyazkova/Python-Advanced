@@ -8,3 +8,7 @@ locks = deque([int(x) for x in input().split()])
 
 value = int(input())
 
+current_barrel = 0
+
+while bullets:
+

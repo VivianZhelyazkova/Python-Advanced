@@ -1,14 +1,17 @@
+from collections import deque
+
 robots = input().split(";")
-robots_deque = {}
+robots_deque = deque()
 
 for robot in robots:
-    name, time = robot.split("-")
-    robots_deque[name] = int(time)
+    info = robot.split("-")
+    robots_deque.append(info)
 
 hours, minutes, seconds = input().split(":")
 
 product = input()
+products = deque()
 while product != "End":
-    
-
+    products.append(product)
     product = input()
+

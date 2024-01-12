@@ -29,3 +29,12 @@ while products:
 
         if info[1] == 0:
             free_robots.append([name, info])
+
+    if not free_robots:
+        products.append(product)
+        continue
+
+    name, info = free_robots[0]
+    robots[name][1] = info[0]
+
+    print(f"{name} - {product} [{factory_time.strftime('%H:%M:%S')}]")

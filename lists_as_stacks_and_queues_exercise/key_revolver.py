@@ -13,6 +13,7 @@ bullets_shot = 0
 
 while bullets:
 
+
     current_bullet = bullets.pop()
     current_lock = locks.popleft()
     current_barrel -= 1

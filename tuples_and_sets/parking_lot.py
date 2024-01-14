@@ -1,11 +1,11 @@
 number = int(input())
 
-cars_in = []
+cars_in = set()
 
 for _ in range(number):
     command, plate = input().split(", ")
     if command == "IN":
-        cars_in.append(plate)
+        cars_in.add(plate)
     else:
         cars_in.remove(plate)
 

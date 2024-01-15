@@ -1,6 +1,7 @@
 number = int(input())
-longest = 0
+
 longest_intersection = set()
+
 for _ in range(number):
     first, second = input().split("-")
     first_start, first_end = first.split(",")
@@ -10,6 +11,8 @@ for _ in range(number):
     second_set = set(range(int(second_start), int(second_end) + 1))
 
     intersection = (first_set.intersection(second_set))
-    longest = max(len(intersection), longest)
-    
+    if len(intersection) > len(longest_intersection):
+        longest_intersection = intersection
 
+
+print(f"Longest intersection is {list(longest_intersection)} with length {len(longest_intersection)}")

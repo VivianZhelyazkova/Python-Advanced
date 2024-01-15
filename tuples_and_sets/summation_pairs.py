@@ -10,4 +10,4 @@ for number in numbers:
 
     if target - number in numbers:
         print(f"{number} + {target - number} = {target}")
-        numbers.remove(number)
+        numbers.remove(number) #I know this is stupid, but it works and it is beautiful!!!

@@ -30,7 +30,7 @@ for _ in range(number):
         if cmd_2 == "First":
             set_1 = set_1 - set(numbers_list)
         elif cmd_2 == "Second":
-            set_2 = set_2 - set(numbers_list)
+            set_2 = set_2.difference(numbers_list)
 
 sorted_1 = sorted(set_1)
 sorted_2 = sorted(set_2)

@@ -14,7 +14,10 @@ def making_honey(bee, nect, symb):
     elif symb == '*':
         result = bee * nect
     elif symb == '/':
-        result = bee / nect
+        if nect == 0:
+            result = 0
+        else:
+            result = bee / nect
     return abs(result)
 
 
@@ -28,9 +31,9 @@ while bees and nectar:
     if current_nectar < current_bee:
         while current_nectar < current_bee:
             if len(nectar) == 0:
+                bees.appendleft(current_bee)
                 break
             current_nectar = nectar.pop()
-
     honey = making_honey(current_bee, current_nectar, symbol)
     total_honey += honey
 

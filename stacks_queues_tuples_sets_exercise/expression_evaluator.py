@@ -1,15 +1,13 @@
-import math
-
 expression = input().split()
 
-expression_copy = expression.copy()
+operators = ['*', '+', '-', '/']
 last_operator_index = 0
 
 current_sum = None
 
 for index, char in enumerate(expression):
 
-    if not char.isnumeric():
+    if char in operators:
         if last_operator_index == 0:
             start = last_operator_index
         else:
@@ -23,7 +21,10 @@ for index, char in enumerate(expression):
             numbers.insert(0, current_sum)
 
         if char == "*":
-            current_sum = math.prod(numbers)
+            total = 1
+            for num in numbers:
+                total *= num
+            current_sum = total
         elif char == "+":
             current_sum = sum(numbers)
         elif char == "-":

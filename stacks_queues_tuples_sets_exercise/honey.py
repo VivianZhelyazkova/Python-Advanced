@@ -21,13 +21,24 @@ def making_honey(bee, nect, symb):
 total_honey = 0
 
 while bees and nectar:
+    current_bee = bees.popleft()
+    current_nectar = nectar.pop()
+    symbol = symbols.popleft()
+    honey = 0
+    if current_nectar < current_bee:
+        while current_nectar < current_bee:
+            if len(nectar) == 0:
+                break
+            current_nectar = nectar.pop()
 
-    current_bee = bees[0]
-    current_nectar = nectar[-1]
+    honey = making_honey(current_bee, current_nectar, symbol)
+    total_honey += honey
 
-    if current_nectar >= current_bee:
-        symbol = symbols.popleft()
-        if current_nectar > 0:
-            honey = making_honey(current_bee, current_nectar, symbol)
-        bees.popleft()
-        nectar.pop()
+print(f"Total honey made: {total_honey}")
+
+if bees:
+    print("Bees left: ", end="")
+    print(*bees, sep=", ")
+if nectar:
+    print("Nectar left: ", end="")
+    print(*nectar, sep=", ")

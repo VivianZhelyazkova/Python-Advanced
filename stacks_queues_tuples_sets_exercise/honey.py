@@ -30,10 +30,7 @@ while bees and nectar:
     honey = 0
     if current_nectar < current_bee:
         while current_nectar < current_bee:
-            if len(nectar) == 0:
-                bees.appendleft(current_bee)
-                break
-            current_nectar = nectar.pop()
+            bees.appendleft(current_bee)
     honey = making_honey(current_bee, current_nectar, symbol)
     total_honey += honey
 

@@ -1,5 +1,5 @@
-set_1 = set(int(x) for x in input().split())
-set_2 = set(int(x) for x in input().split())
+set_1 = set(input().split())
+set_2 = set(input().split())
 
 number = int(input())
 
@@ -11,12 +11,7 @@ for _ in range(number):
         print(set_1.issubset(set_2) or set_2.issubset(set_1))
         continue
 
-    cmd_split = command.split()
-    cmd_1 = cmd_split[0]
-    cmd_2 = cmd_split[1]
-    numbers = cmd_split[2:]
-
-    numbers_list = list(int(x) for x in numbers)
+    cmd_1, cmd_2, *numbers_list = command.split()
 
     if cmd_1 == "Add":
 

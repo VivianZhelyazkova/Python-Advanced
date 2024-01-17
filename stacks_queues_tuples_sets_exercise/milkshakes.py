@@ -5,44 +5,29 @@ milk = deque(int(x) for x in input().split(", "))
 
 milkshakes = 0
 
-while milkshakes < 5 and chocolates and milk:
-    last_chocolate = chocolates[-1]
-    first_milk = milk[0]
-    is_invalid = False
-    while last_chocolate <= 0:
-        chocolates.pop()
-        if not chocolates:
-            is_invalid = True
-            break
-        last_chocolate = chocolates[-1]
-    while first_milk <= 0:
-        milk.popleft()
-        if not milk:
-            is_invalid = True
-            break
-        first_milk = milk[0]
-    if is_invalid:
-        break
+while milkshakes != 5 and chocolates and milk:
+    chocolate = chocolates.pop()
+    cup_of_milk = milk.popleft()
 
-    if last_chocolate == first_milk:
+    if chocolate <= 0 and cup_of_milk <= 0:
+        continue
+    elif chocolate <= 0:
+        milk.appendleft(cup_of_milk)
+        continue
+    elif cup_of_milk <= 0:
+        chocolates.append(chocolate)
+        continue
+
+    if cup_of_milk == chocolate:
         milkshakes += 1
-        chocolates.pop()
-        milk.popleft()
     else:
-        milk.rotate(-1)
-        chocolates[-1] -= 5
+        milk.append(cup_of_milk)
+        chocolates.append(chocolate - 5)
 
 if milkshakes == 5:
     print("Great! You made all the chocolate milkshakes needed!")
 else:
     print("Not enough milkshakes.")
-if len(chocolates) > 0:
-    chocolates_str = [str(x) for x in chocolates]
-    print(f"Chocolate:", ", ".join(chocolates_str))
-else:
-    print("Chocolate: empty")
-if len(milk) > 0:
-    milk_str = [str(x) for x in milk]
-    print("Milk:", ", ".join(milk_str))
-else:
-    print("Milk: empty")
+
+print(f"Chocolate: {', '.join(str(x) for x in chocolates) or 'empty'}")
+print(f"Milk: {', '.join(str(x) for x in milk) or 'empty'}")

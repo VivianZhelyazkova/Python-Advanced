@@ -33,7 +33,10 @@ while string:
         if color_2 in secondary_colors:
             colors_made.append(color_2)
 
-        if color_1 not in main_colors and color_2 not in main_colors and color_1 not in secondary_colors and color_2 not in secondary_colors:
+        if (color_1 not in main_colors
+                and color_2 not in main_colors
+                and color_1 not in secondary_colors
+                and color_2 not in secondary_colors):
             first = removesuffix(first, first[-1])
             last = removesuffix(last, last[-1])
             index = ceil(len(string) / 2)

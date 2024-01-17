@@ -6,7 +6,6 @@ magic = deque(int(x) for x in input().split())
 presents = {150: "Doll", 250: "Wooden train", 300: "Teddy bear", 400: "Bicycle"}
 crafted_presents = {"Bicycle": 0, "Doll": 0, "Teddy bear": 0, "Wooden train": 0}
 
-
 while materials and magic:
 
     current_box = materials.pop()
@@ -23,7 +22,13 @@ while materials and magic:
         materials.append(new_value)
 
     elif magic_level not in presents and magic_level > 0:
-        materials.append(current_box + 15)
+        current_box += 15
+        materials.append(current_box)
+    else:
+        if current_box != 0:
+            materials.append(current_box)
+        if current_magic != 0:
+            magic.appendleft(current_magic)
 
 pair_made = False
 

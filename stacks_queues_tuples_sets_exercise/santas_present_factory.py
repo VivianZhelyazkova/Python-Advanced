@@ -14,18 +14,9 @@ while materials and magic:
 
     if current_box == 0:
         materials.pop()
-        # while current_box == 0:
-        #     if not materials:
-        #         is_empty = True
-        #         break
-        #     current_box = materials.pop()
+
     if current_magic == 0:
         magic.popleft()
-        # while current_magic == 0:
-        #     if not magic:
-        #         is_empty = True
-        #         break
-        #     current_magic = magic.popleft()
 
     if is_empty:
         break

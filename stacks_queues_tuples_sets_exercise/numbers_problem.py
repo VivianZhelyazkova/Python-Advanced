@@ -1,5 +1,5 @@
-set_1 = set(input().split())
-set_2 = set(input().split())
+set_1 = set(int(x) for x in input().split())
+set_2 = set(int(x) for x in input().split())
 
 number = int(input())
 
@@ -12,6 +12,8 @@ for _ in range(number):
         continue
 
     cmd_1, cmd_2, *numbers_list = command.split()
+
+    numbers_list = [int(x) for x in numbers_list]
 
     if cmd_1 == "Add":
 

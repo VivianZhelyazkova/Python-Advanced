@@ -18,5 +18,4 @@ for y in range(rows):
     # if is_found:
     #     break
 
-else:
-    print(f"{symbol} does not occur in the matrix")
+print(f"{symbol} does not occur in the matrix")

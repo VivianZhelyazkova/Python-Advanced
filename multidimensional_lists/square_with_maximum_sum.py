@@ -4,14 +4,12 @@ matrix = []
 for x in range(rows):
     matrix.append([int(num) for num in input().split(", ")])
 
-result = 0
+result = float("-inf")
 values = []
 
-for y in range(cols):
+for y in range(rows - 1):
 
-    for x in range(rows):
-        if x + 1 == rows - 1 or y + 1 == cols - 1:
-            break
+    for x in range(cols - 1):
         top_left = matrix[y][x]
         top_right = matrix[y][x + 1]
         bottom_left = matrix[y + 1][x]
@@ -19,10 +17,8 @@ for y in range(cols):
         current_result = top_left + top_right + bottom_left + bottom_right
         if current_result > result:
             result = current_result
-            values.append(top_left)
-            values.append(top_right)
-            values.append(bottom_left)
-            values.append(bottom_right)
+            values = [[top_left, top_right], [bottom_left, bottom_right]]
 
+print(*values[0], sep=" ")
+print(*values[1], sep=" ")
 print(result)
-print(values)

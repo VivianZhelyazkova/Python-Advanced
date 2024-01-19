@@ -34,6 +34,6 @@ for y in range(rows - 2):
 
 print(f"Sum = {max_value}")
 
-for sum, matrix in current_result.items():
+for sum, matrix in result.items():
     for row in matrix:
         print(*row, sep=" ")

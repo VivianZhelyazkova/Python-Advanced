@@ -1,9 +1,6 @@
 rows = int(input())
 
-matrix = []
-
-for row in range(rows):
-    matrix.append([int(x) for x in input().split(',')])
+matrix = [[int() for x in input().split(", ")] for row in range(rows)]
 
 primary_diagonal = []
 secondary_diagonal = []

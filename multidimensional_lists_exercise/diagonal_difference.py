@@ -5,14 +5,12 @@ matrix = []
 for row in range(rows):
     matrix.append([int(x) for x in input().split()])
 
-primary_diagonal = []
-secondary_diagonal = []
+primary_diagonal = 0
+secondary_diagonal = 0
 
 for x in range(rows):
-    primary_diagonal.append(matrix[x][x])
+    primary_diagonal += matrix[x][x]
+    secondary_diagonal += matrix[x][rows - 1 - x]
 
-for x in range(rows):
-    secondary_diagonal.append(matrix[x][rows-1-x])
-
-diff = abs(sum(primary_diagonal)-sum(secondary_diagonal))
+diff = abs(primary_diagonal - secondary_diagonal)
 print(diff)

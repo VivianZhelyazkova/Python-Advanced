@@ -1,5 +1,5 @@
 rows = int(input())
-cols = rows
+
 matrix = []
 
 for row in range(rows):

@@ -1,14 +1,25 @@
 from functools import reduce
 
 n = int(input())
-
 commands = input().split()
 
 matrix = [[x for x in input().split()] for _ in range(n)]
+
 COAL = "c"
 END = "e"
 EMPTY = "*"
 MINER = "s"
+
+
+def get_miner_position(some_matrix):
+    miner_position = []
+    for index, row in enumerate(some_matrix):
+        if MINER in row:
+            miner_col = row.index(MINER)
+            miner_row = index
+            miner_position.append(miner_row)
+            miner_position.append(miner_col)
+    return miner_position
 
 
 def get_new_position(cmd, position):
@@ -37,15 +48,8 @@ def coal_left(some_matrix):
     return coal
 
 
-miner_position = []
+miner_position = get_miner_position(matrix)
 total_coal = 0
-
-for index, row in enumerate(matrix):
-    if MINER in row:
-        miner_col = row.index(MINER)
-        miner_row = index
-        miner_position.append(miner_row)
-        miner_position.append(miner_col)
 
 for command in commands:
     next_position = get_new_position(command, miner_position)

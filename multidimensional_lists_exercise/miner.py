@@ -1,8 +1,14 @@
+from functools import reduce
+
 n = int(input())
 
 commands = input().split()
 
 matrix = [[x for x in input().split()] for _ in range(n)]
+COAL = "c"
+END = "e"
+EMPTY = "*"
+MINER = "s"
 
 
 def get_new_position(cmd, position):
@@ -25,23 +31,38 @@ def is_position_valid(position):
     return True
 
 
+def coal_left(some_matrix):
+    flatten = reduce(lambda a, b: a + b, some_matrix)
+    coal = flatten.count(COAL)
+    return coal
+
+
 miner_position = []
 total_coal = 0
 
 for index, row in enumerate(matrix):
-    if "s" in row:
-        miner_col = row.index("s")
+    if MINER in row:
+        miner_col = row.index(MINER)
         miner_row = index
         miner_position.append(miner_row)
         miner_position.append(miner_col)
 
 for command in commands:
     next_position = get_new_position(command, miner_position)
-    row, col = next_position
-    if matrix[row][col] == "c":
-        total_coal += 1
-        matrix[row][col] = "*"
-        
-    elif matrix[row][col] == "e":
+    miner_position = next_position
+    row, col = miner_position
 
-[print(*row) for row in matrix]
+    if matrix[row][col] == COAL:
+        total_coal += 1
+        matrix[row][col] = EMPTY
+
+    elif matrix[row][col] == END:
+        print(f"Game over! ({row}, {col})")
+        exit()
+row, col = miner_position
+remaining_coal = coal_left(matrix)
+
+if remaining_coal == 0:
+    print(f"You collected all coal! ({row}, {col})")
+else:
+    print(f"{remaining_coal} pieces of coal left. ({row}, {col})")

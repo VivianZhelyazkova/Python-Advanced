@@ -26,6 +26,7 @@ def is_position_valid(position):
 
 
 miner_position = []
+total_coal = 0
 
 for index, row in enumerate(matrix):
     if "s" in row:
@@ -35,5 +36,12 @@ for index, row in enumerate(matrix):
         miner_position.append(miner_col)
 
 for command in commands:
+    next_position = get_new_position(command, miner_position)
+    row, col = next_position
+    if matrix[row][col] == "c":
+        total_coal += 1
+        matrix[row][col] = "*"
+        
+    elif matrix[row][col] == "e":
 
 [print(*row) for row in matrix]

@@ -1,3 +1,5 @@
+from functools import reduce
+
 n = int(input())
 
 matrix = [[int(x) for x in input().split()] for _ in range(n)]
@@ -10,7 +12,7 @@ indices_matrix = []
 def are_coordinates_valid(x, y, lenght):
     if x < 0 or y < 0:
         return False
-    if x > lenght or y > lenght:
+    if x > lenght-1 or y > lenght-1:
         return False
     return True
 
@@ -44,3 +46,10 @@ for coordinate in indices_matrix:
         if matrix[x][y] > 0:
             matrix[x][y] -= bomb
         matrix[row][col] = 0
+
+flattened_matrix = reduce(lambda a, b: b + a, matrix)
+filtered_matrix = [x for x in flattened_matrix if x > 0]
+
+print(f"Alive cells: {len(filtered_matrix)}")
+print(f"Sum: {sum(filtered_matrix)}")
+[print(*row) for row in matrix]

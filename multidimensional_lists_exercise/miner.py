@@ -42,7 +42,6 @@ def is_position_valid(position):
     return True
 
 
-
 def coal_left(some_matrix):
     flatten = reduce(lambda a, b: a + b, some_matrix)
     coal = flatten.count(COAL)

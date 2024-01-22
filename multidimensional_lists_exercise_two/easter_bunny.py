@@ -39,7 +39,7 @@ for coordinates, direction in positions.items():
             break
         new_row += row
         new_col += col
-    if current_sum > max_sum:
+    if current_sum >= max_sum:
         max_sum = current_sum
         best_position = direction
         best_route = current_route
@@ -47,3 +47,5 @@ for coordinates, direction in positions.items():
 print(best_position)
 [print(row) for row in best_route]
 print(max_sum)
+
+

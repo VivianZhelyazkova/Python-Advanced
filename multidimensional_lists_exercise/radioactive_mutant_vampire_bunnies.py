@@ -72,7 +72,7 @@ def multiply_bunnies():
 is_alive = True
 has_escaped = False
 player_position = get_player_position(matrix)
-new_position = []
+new_position = player_position
 
 while commands and is_alive and not has_escaped:
     command = commands.popleft()
@@ -91,6 +91,8 @@ while commands and is_alive and not has_escaped:
             is_alive = False
 
     multiply_bunnies()
+    # if matrix[new_position[0]][new_position[1]] == BUNNY:
+    #     is_alive = False
 
 [print(*row, sep="") for row in matrix]
 

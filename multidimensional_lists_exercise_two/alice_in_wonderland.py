@@ -38,14 +38,15 @@ while bags < 10 and is_within:
         matrix[path_row][path_col] = PATH
         alice_position = next_position
 
-    # elif new_row in range(n) and new_col in range(n) and matrix[new_row][new_col] == HOLE:
-    #     matrix[new_row][new_col] = PATH
-    #     is_within = False
+    elif new_row in range(n) and new_col in range(n) and matrix[new_row][new_col] == HOLE:
+        matrix[new_row][new_col] = PATH
+        is_within = False
 
     else:
         is_within = False
 
-    
+if alice_position[0] in range(n) and alice_position[1] in range(n):
+    matrix[alice_position[0]][alice_position[1]] = PATH
 
 if bags >= 10:
     print("She did it! She went to the party.")

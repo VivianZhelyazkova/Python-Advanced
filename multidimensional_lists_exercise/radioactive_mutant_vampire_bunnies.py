@@ -33,14 +33,18 @@ def get_new_position(cmd, position, is_for_bunny=False):
         UP: [row - 1, col],
         DOWN: [row + 1, col]
     }
+    new_position = commands_map[cmd]
     if is_for_bunny:
-        return commands_map[cmd] if is_within_matrix(position) else position
-    return commands_map[cmd]
+        if is_within_matrix(new_position):
+            return new_position
+        else:
+            return position
+    return new_position
 
 
 def is_within_matrix(position):
     row, col = position
-    return row < row_count and col < col_count and row >= 0 and col >= 0
+    return row in range(row_count) and col in range(col_count)
 
 
 def get_bunnies_positions(some_matrix):
@@ -63,21 +67,24 @@ def multiply_bunnies():
         matrix[bot_bunny[0]][bot_bunny[1]] = BUNNY
         matrix[left_bunny[0]][left_bunny[1]] = BUNNY
         matrix[right_bunny[0]][right_bunny[1]] = BUNNY
-        print(top_bunny)
 
 
 is_alive = True
 has_escaped = False
+player_position = get_player_position(matrix)
+new_position = []
 
 while commands and is_alive and not has_escaped:
     command = commands.popleft()
     player_position = get_player_position(matrix)
     new_position = get_new_position(command, player_position)
     has_escaped = not is_within_matrix(new_position)
+
     matrix[player_position[0]][player_position[1]] = EMPTY
 
     if not has_escaped:
         if matrix[new_position[0]][new_position[1]] != BUNNY:
+
             matrix[new_position[0]][new_position[1]] = PLAYER
 
         else:
@@ -85,4 +92,9 @@ while commands and is_alive and not has_escaped:
 
     multiply_bunnies()
 
-[print(*row) for row in matrix]
+[print(*row, sep="") for row in matrix]
+
+if has_escaped or is_alive:
+    print(f"won:",' '.join(str(x) for x in player_position))
+else:
+    print(f"dead:",' '.join(str(x) for x in new_position))

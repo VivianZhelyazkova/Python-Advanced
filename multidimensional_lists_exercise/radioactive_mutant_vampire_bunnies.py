@@ -1,6 +1,6 @@
 from collections import deque
 
-row, col = [int(x) for x in input().split()]
+row_count, col_count = [int(x) for x in input().split()]
 matrix = [[x for x in input()] for x in range(row)]
 commands = deque(input())
 
@@ -25,7 +25,7 @@ def get_player_position(some_matrix):
     return player_position
 
 
-def get_new_position(cmd, position):
+def get_new_position(cmd, position, is_for_bunny=False):
     row, col = position
     commands_map = {
         LEFT: [row, col - 1],
@@ -33,12 +33,14 @@ def get_new_position(cmd, position):
         UP: [row - 1, col],
         DOWN: [row + 1, col]
     }
+    if is_for_bunny:
+        return commands_map[cmd] if is_within_matrix(position) else position
     return commands_map[cmd]
 
 
-def is_within_matrix(position, x, y):
+def is_within_matrix(position):
     row, col = position
-    return row == x or col == y or row < 0 or col < 0
+    return row == row_count or col == col_count or row < 0 or col < 0
 
 
 def get_bunnies_positions(some_matrix):
@@ -50,10 +52,13 @@ def get_bunnies_positions(some_matrix):
     return bunnies_positions
 
 
-def multiply_bunnies(bunny_positions,some_matrix):
+def multiply_bunnies(bunny_positions, some_matrix):
     for coordinates in bunny_positions:
-        row, col = coordinates
-        
+        top_bunny = get_new_position(UP, coordinates, True)
+        bot_bunny = get_new_position(DOWN, coordinates, True)
+        left_bunny = get_new_position(LEFT, coordinates, True)
+        right_bunny = get_new_position(RIGHT, coordinates, True)
+        matrix[top_bunny[0]][top_bunny[1]] = BUNNY
 
 
 is_alive = True
@@ -63,6 +68,6 @@ while commands and is_alive and not has_escaped:
     command = commands.popleft()
     player_position = get_player_position(matrix)
     new_position = get_new_position(command, player_position)
-    has_escaped = is_within_matrix(new_position, row, col)
+    has_escaped = is_within_matrix(new_position)
 
 print(matrix)

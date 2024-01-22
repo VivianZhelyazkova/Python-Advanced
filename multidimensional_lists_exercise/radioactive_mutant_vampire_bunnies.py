@@ -36,6 +36,11 @@ def get_new_position(cmd, position):
     return commands_map[cmd]
 
 
+def escaped(position, x, y):
+    row, col = position
+    return row == x or col == y or row < 0 or col < 0
+   
+
 
 
 is_alive = True

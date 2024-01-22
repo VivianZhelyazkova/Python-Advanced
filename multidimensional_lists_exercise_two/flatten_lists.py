@@ -1,3 +1,5 @@
-matrix = [[x for x in part if x.isnumeric()] for part in input().split("|")]
+from functools import reduce
 
-[print(*row) for row in matrix]
+matrix = [[int(x) for x in part.split()] for part in input().split("|")]
+
+[print(*row, end=' ') for row in reversed(matrix) if row]

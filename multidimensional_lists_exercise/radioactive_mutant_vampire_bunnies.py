@@ -1,7 +1,7 @@
 from collections import deque
 
 row_count, col_count = [int(x) for x in input().split()]
-matrix = [[x for x in input()] for x in range(row)]
+matrix = [[x for x in input()] for x in range(row_count)]
 commands = deque(input())
 
 PLAYER = "P"
@@ -40,7 +40,7 @@ def get_new_position(cmd, position, is_for_bunny=False):
 
 def is_within_matrix(position):
     row, col = position
-    return row == row_count or col == col_count or row < 0 or col < 0
+    return row < row_count and col < col_count and row >= 0 and col >= 0
 
 
 def get_bunnies_positions(some_matrix):
@@ -52,13 +52,18 @@ def get_bunnies_positions(some_matrix):
     return bunnies_positions
 
 
-def multiply_bunnies(bunny_positions, some_matrix):
+def multiply_bunnies():
+    bunny_positions = get_bunnies_positions(matrix)
     for coordinates in bunny_positions:
         top_bunny = get_new_position(UP, coordinates, True)
         bot_bunny = get_new_position(DOWN, coordinates, True)
         left_bunny = get_new_position(LEFT, coordinates, True)
         right_bunny = get_new_position(RIGHT, coordinates, True)
         matrix[top_bunny[0]][top_bunny[1]] = BUNNY
+        matrix[bot_bunny[0]][bot_bunny[1]] = BUNNY
+        matrix[left_bunny[0]][left_bunny[1]] = BUNNY
+        matrix[right_bunny[0]][right_bunny[1]] = BUNNY
+        print(top_bunny)
 
 
 is_alive = True
@@ -68,6 +73,16 @@ while commands and is_alive and not has_escaped:
     command = commands.popleft()
     player_position = get_player_position(matrix)
     new_position = get_new_position(command, player_position)
-    has_escaped = is_within_matrix(new_position)
+    has_escaped = not is_within_matrix(new_position)
+    matrix[player_position[0]][player_position[1]] = EMPTY
 
-print(matrix)
+    if not has_escaped:
+        if matrix[new_position[0]][new_position[1]] != BUNNY:
+            matrix[new_position[0]][new_position[1]] = PLAYER
+
+        else:
+            is_alive = False
+
+    multiply_bunnies()
+
+[print(*row) for row in matrix]

@@ -23,6 +23,8 @@ for row in range(n):
         if matrix[row][col] == SHOOTER:
             shooter_position = [row, col]
 
+targets_shot = []
+
 for _ in range(number_of_commands):
 
     command = input()
@@ -42,17 +44,30 @@ for _ in range(number_of_commands):
     elif "shoot" in command:
         cmd, direction = command.split()
         row, col = shooter_position
-        if direction == "right":
-            col_range = range(col, n)
-        elif direction == "left":
-            col_range = range(col, -1, -1)
-        elif direction == "up":
-            row_range = range(row, -1, -1)
-        elif direction == "down":
-            row_range = range(row, n)
 
-        if
+        target_found = False
 
-    print(next_move)
-    print(next_row)
-    print(next_col)
+        while row in range(n) and col in range(n) and not target_found:
+            next_move = move(direction, 1)
+            row = next_move[0] + row
+            col = next_move[1] + col
+            if row in range(n) and col in range(n):
+                if matrix[row][col] == TARGET:
+                    matrix[row][col] = EMPTY
+                    targets_shot.append([row,col])
+                    target_found = True
+
+targets_left = 0
+
+for row in range(n):
+    for col in range(n):
+        if matrix[row][col] == TARGET:
+            targets_left += 1
+
+if targets_left:
+    print(f"Training not completed! {targets_left} targets left.")
+else:
+    print(f"Training completed! All {len(targets_shot)} targets hit.")
+
+for target in targets_shot:
+    print(target)

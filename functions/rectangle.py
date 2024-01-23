@@ -9,6 +9,3 @@ def rectangle(length, width):
         return 2 * width + 2 * length
 
     return f"Rectangle area: {area()}\nRectangle perimeter: {perimeter()}"
-
-
-print(rectangle(2, 10))

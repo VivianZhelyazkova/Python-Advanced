@@ -18,10 +18,13 @@ def move(dire, step):
 
 
 shooter_position = []
+targets_count = 0
 for row in range(n):
     for col in range(n):
         if matrix[row][col] == SHOOTER:
             shooter_position = [row, col]
+        if matrix[row][col] == TARGET:
+            targets_count += 1
 
 targets_shot = []
 
@@ -44,19 +47,19 @@ for _ in range(number_of_commands):
     elif "shoot" in command:
         cmd, direction = command.split()
         row, col = shooter_position
+        next_move = move(direction, 1)
+        new_row = next_move[0] + row
+        new_col = next_move[1] + col
 
-        target_found = False
-
-        while row in range(n) and col in range(n) and not target_found:
-            next_move = move(direction, 1)
-            row = next_move[0] + row
-            col = next_move[1] + col
-            if row in range(n) and col in range(n):
-                if matrix[row][col] == TARGET:
-                    matrix[row][col] = EMPTY
-                    targets_shot.append([row,col])
-                    target_found = True
-
+        while new_row in range(n) and new_col in range(n):
+            if matrix[new_row][new_col] == TARGET:
+                matrix[new_row][new_col] = EMPTY
+                targets_shot.append([new_row, new_col])
+                break
+            new_row += next_move[0]
+            new_col += next_move[1]
+    if len(targets_shot) == targets_count:
+        break
 targets_left = 0
 
 for row in range(n):

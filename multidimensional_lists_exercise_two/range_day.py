@@ -42,8 +42,15 @@ for _ in range(number_of_commands):
         cmd, direction = command.split()
         row, col = shooter_position
         if direction == "right":
+            shooting_range = range(col, n)
+        elif direction == "left":
+            shooting_range = range(col, -1, -1)
+        elif direction == "up":
+            shooting_range = range(row, -1, -1)
+        elif direction == "down":
             shooting_range = range(row, n)
 
+        
 
     print(next_move)
     print(next_row)

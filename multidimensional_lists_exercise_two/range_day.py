@@ -9,10 +9,10 @@ EMPTY = "."
 
 def move(dire, step):
     moves = {
-        "right": [0, 0 + steps],
-        "left": [0, 0 - steps],
-        "up": [0 - steps, 0],
-        "down": [0 + steps, 0]
+        "right": [0, step],
+        "left": [0, -step],
+        "up": [-step, 0],
+        "down": [step, 0]
     }
     return moves[dire]
 
@@ -38,19 +38,20 @@ for _ in range(number_of_commands):
             if matrix[next_row][next_col] == EMPTY:
                 matrix[shooter_position[0]][shooter_position[1]] = EMPTY
                 matrix[next_row][next_col] = SHOOTER
+                shooter_position = [next_row, next_col]
     elif "shoot" in command:
         cmd, direction = command.split()
         row, col = shooter_position
         if direction == "right":
-            shooting_range = range(col, n)
+            col_range = range(col, n)
         elif direction == "left":
-            shooting_range = range(col, -1, -1)
+            col_range = range(col, -1, -1)
         elif direction == "up":
-            shooting_range = range(row, -1, -1)
+            row_range = range(row, -1, -1)
         elif direction == "down":
-            shooting_range = range(row, n)
+            row_range = range(row, n)
 
-        
+        if
 
     print(next_move)
     print(next_row)

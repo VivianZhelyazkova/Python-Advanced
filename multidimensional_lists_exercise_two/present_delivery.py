@@ -43,7 +43,6 @@ for row in range(n):
 total_nice_kids = nice_kids
 command = input()
 
-
 while command != "Christmas morning":
     next_move = get_new_position(command, santa_position)
     new_row, new_col = next_move
@@ -75,9 +74,7 @@ while command != "Christmas morning":
     else:
         break
 
-
-
-if not presents:
+if not presents and nice_kids:
     print("Santa ran out of presents!")
 
 [print(*row) for row in matrix]

@@ -31,6 +31,7 @@ def move(s_position, x, y, some_matrix):
 
 
 santa_position = []
+total_nice_kids = 0
 nice_kids = 0
 
 for row in range(n):
@@ -39,11 +40,11 @@ for row in range(n):
             santa_position = [row, col]
         if matrix[row][col] == NICE:
             nice_kids += 1
-
+total_nice_kids = nice_kids
 command = input()
-out_of_presents = False
 
-while command != "Christmas morning" and presents:
+
+while command != "Christmas morning":
     next_move = get_new_position(command, santa_position)
     new_row, new_col = next_move
     if matrix[new_row][new_col] == NAUGHTY or matrix[new_row][new_col] == EMPTY:
@@ -55,26 +56,33 @@ while command != "Christmas morning" and presents:
     elif matrix[new_row][new_col] == COOKIES:
         santa_position = move(santa_position, new_row, new_col, matrix)
         kids = []
-        kids.append(get_new_position("up", santa_position))
-        kids.append(get_new_position("down", santa_position))
         kids.append(get_new_position("left", santa_position))
         kids.append(get_new_position("right", santa_position))
+        kids.append(get_new_position("up", santa_position))
+        kids.append(get_new_position("down", santa_position))
 
         for kid in kids:
-            if presents:
-                presents -= 1
-            else:
-                break
+
             if matrix[kid[0]][kid[1]] != EMPTY and matrix[kid[0]][kid[1]] != COOKIES:
-                if matrix[kid[0]][kid[1]] == NICE:
+                if matrix[kid[0]][kid[1]] == NICE and presents:
                     nice_kids -= 1
+                if presents:
+                    presents -= 1
                 matrix[kid[0]][kid[1]] = EMPTY
 
-    command = input()
-    
+    if presents:
+        command = input()
+    else:
+        break
+
+
+
 if not presents:
     print("Santa ran out of presents!")
 
 [print(*row) for row in matrix]
 
-
+if nice_kids:
+    print(f"No presents for {nice_kids} nice kid/s.")
+else:
+    print(f"Good job, Santa! {total_nice_kids - nice_kids} happy nice kid/s.")

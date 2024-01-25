@@ -1,9 +1,9 @@
-nums_input = input().split()
+nums_input = [int(x) for x in input().split()]
 
 
 def positive_or_negative(numbers):
-    positive = sum([int(x) for x in numbers if int(x) > 0])
-    negative = sum([int(x) for x in numbers if int(x) < 0])
+    positive = sum([x for x in numbers if x > 0])
+    negative = sum([x for x in numbers if x < 0])
     return positive, negative
 
 

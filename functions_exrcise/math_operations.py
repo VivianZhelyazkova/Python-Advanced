@@ -19,9 +19,5 @@ def math_operations(*args, **kwargs):
         operations(key, num, kwargs)
         index += 1
     sorted_dict = dict(sorted(kwargs.items(), key=lambda x: (-x[1], x[0])))
-    result = ""
-    for key, val in sorted_dict.items():
-        result += f"{key}: {val:.1f}\n"
-    return result
 
-
+    return "\n".join(f"{key}: {val:.1f}" for key, val in sorted_dict)

@@ -1,6 +1,18 @@
 from collections import deque
 
 
+def operations(operator, number, some_dict):
+    if operator == "a":
+        some_dict[operator] += number
+    elif operator == "s":
+        some_dict[operator] -= number
+    elif operator == "d":
+        if number != 0:
+            some_dict[operator] /= number
+    elif operator == "m":
+        some_dict[operator] *= number
+
+
 def math_operations(*args, **kwargs):
     index = 0
     for num in args:
@@ -22,4 +34,3 @@ def math_operations(*args, **kwargs):
     for key, val in sorted_dict.items():
         result += f"{key}: {val:.1f}\n"
     return result
-

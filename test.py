@@ -1,12 +1,8 @@
-import sys
-
-sys.setrecursionlimit(3000)
-
 n = int(input())
 KATE = "k"
 EMPTY = " "
 WALL = "#"
-
+PATH = "*"
 matrix = [[x for x in input()] for _ in range(n)]
 
 positions = {
@@ -17,30 +13,30 @@ positions = {
 }
 
 
-def moving(pos, some_matrix):
+def is_valid(pos, some_matrix):
+    curr_row, curr_col = pos
+    return curr_row in range(n) and curr_col in range(len(some_matrix[curr_row]))
+
+
+def moving(pos, some_matrix, steps):
     current_row, current_col = pos
-    if current_row not in range(n) or current_col not in range(len(some_matrix[current_row])):
-        print("whatever")
+    if not is_valid(pos, some_matrix):
         return True
     if some_matrix[current_row][current_col] == WALL:
         return False
 
-    left_row, left_col = positions["left"]
-    if moving([left_row + current_row, left_col + current_col], some_matrix):
-
-        return True
-    right_row, right_col = positions["right"]
-    if moving([right_row + current_row, right_col + current_col], some_matrix):
-
-        return True
-    up_row, up_col = positions["up"]
-    if moving([up_row + current_row, up_col + current_col], some_matrix):
-
-        return True
-    down_row, down_col = positions["down"]
-    if moving([down_row + current_row, down_col + current_col], some_matrix):
-
-        return True
+    for k, v in positions.items():
+        new_row, new_col = v
+        new_row += current_row
+        new_col += current_col
+        if is_valid([new_row, new_col], some_matrix):
+            if some_matrix[new_row][new_col] == EMPTY:
+                matrix[current_row][current_col] = PATH
+                if moving([new_row, new_col], some_matrix, steps + 1):
+                    return True
+        else:
+            print(f"Kate got out in {steps} moves")
+            return True
     return False
 
 
@@ -51,6 +47,5 @@ for row in range(n):
         if matrix[row][col] == "k":
             kate_position = [row, col]
 
-print(moving(kate_position, matrix))
-
-[print(row) for row in matrix]
+if not moving(kate_position, matrix, 1):
+    print("Kate cannot get out")

@@ -9,7 +9,7 @@ try:
     with open(path) as f:
         content = [line for index, line in enumerate(f.readlines()) if index % 2 == 0]
 except FileNotFoundError:
-    print(f"File '{path}' not found.")
+    print(f"File '{path}' not found!")
 
 for index, line in enumerate(content):
     current_line = line

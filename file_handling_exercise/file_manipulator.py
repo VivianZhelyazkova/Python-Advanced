@@ -18,8 +18,8 @@ while command != "End":
 
     elif "Replace" in command:
         old_string, new_string = info[1], info[2]
-        if os.path.exists(file_path):
 
+        if os.path.exists(file_path):
             with open(file_path, "r+") as f:
                 text = f.read()
                 new_text = text.replace(old_string, new_string)
@@ -30,9 +30,9 @@ while command != "End":
             print("An error occurred")
 
     elif "Delete" in command:
-        if os.path.exists(file_path):
+        try:
             os.remove(file_path)
-        else:
+        except FileNotFoundError:
             print("An error occurred")
 
     command = input()

@@ -10,10 +10,10 @@ try:
 except FileNotFoundError:
     print(f"Fine {text_path} not found!")
 
-with open(output_path,"w") as f:
+with open(output_path, "w") as f:
     for index, line in enumerate(lines):
-        letters = 0
-        punct_marks = 0
+        letters, punct_marks = 0, 0
+
         for char in line:
             if char.isalpha():
                 letters += 1
@@ -21,4 +21,3 @@ with open(output_path,"w") as f:
                 punct_marks += 1
         new_line = f"Line {index + 1}: {line} ({letters})({punct_marks})\n"
         f.write(new_line)
-

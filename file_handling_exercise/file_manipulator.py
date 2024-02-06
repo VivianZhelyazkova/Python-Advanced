@@ -3,22 +3,21 @@ import os
 command = input()
 
 while command != "End":
-    if "Create" in command:
-        file_name = command.split("-")[1]
-        file_path = os.path.join("resources", file_name)
+    cmd, *info = command.split("-")
+    file_name = info[0]
+    file_path = os.path.join("resources", file_name)
+
+    if cmd == "Create":
         with open(file_path, "w") as f:
             pass
 
-    elif "Add" in command:
-        cmd, file_name, content = command.split("-")
-        file_path = os.path.join("resources", file_name)
+    elif cmd == "Add":
+        content = info[1]
         with open(file_path, "a") as f:
             f.write(content + "\n")
 
     elif "Replace" in command:
-        cmd, file_name, old_string, new_string = command.split("-")
-
-        file_path = os.path.join("resources", file_name)
+        old_string, new_string = info[1], info[2]
         if os.path.exists(file_path):
 
             with open(file_path, "r+") as f:
@@ -31,8 +30,6 @@ while command != "End":
             print("An error occurred")
 
     elif "Delete" in command:
-        file_name = command.split("-")[1]
-        file_path = os.path.join("resources", file_name)
         if os.path.exists(file_path):
             os.remove(file_path)
         else:

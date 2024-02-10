@@ -55,3 +55,4 @@ if collected_nuts < 3 and is_alive:
     print("There are more hazelnuts to collect.")
 
 print(f"Hazelnuts collected: {collected_nuts}")
+

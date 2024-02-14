@@ -1,13 +1,17 @@
 numbers = [int(x) for x in input().split()]
 target = int(input())
 
-while numbers:
-    mid_num = numbers[len(numbers) // 2]
-    index = numbers.index(mid_num)
-    if mid_num == target:
-        print(index)
+start = 0
+end = len(numbers) - 1
+index = -1
+while start <= end:
+    mid_index = end + start // 2
+    if numbers[mid_index] == target:
+        index = mid_index
         break
-    elif mid_num > target:
-        numbers = numbers[:index]
-    elif mid_num < target:
-        numbers = numbers[index + 1:]
+    elif numbers[mid_index] < target:
+        start = mid_index + 1
+    elif numbers[mid_index] > target:
+        end = mid_index - 1
+
+print(index)

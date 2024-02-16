@@ -13,11 +13,3 @@ def start_spring(**kwargs):
         for obj in sorted(objs):
             result += f"-{obj}\n"
     return result
-
-example_objects = {"Swallow": "bird",
-                   "Thrushes": "bird",
-                   "Woodpeckers": "bird",
-                   "Swallows": "bird",
-                   "Warblers": "bird",
-                   "Shrikes": "bird",}
-print(start_spring(**example_objects))
